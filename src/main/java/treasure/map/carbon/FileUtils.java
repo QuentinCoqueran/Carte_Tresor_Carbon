@@ -33,40 +33,40 @@ public class FileUtils {
         return fileLines;
     }
 
-    public static int arraylen(String[] stArray){
+    public static int arraylen(String[] stArray) {
         int i = 0;
         int count = 0;
-        while(stArray[i] != null){
+        while (stArray[i] != null) {
             count++;
             i++;
         }
         return count;
     }
 
-    public static int countMountains(String[] parsedData){
+    public static int countMountains(String[] parsedData) {
         int count = 0;
-        for(String line: parsedData){
-            if(line.startsWith("M")) {
+        for (String line : parsedData) {
+            if (line.startsWith("M")) {
                 count++;
             }
         }
         return count;
     }
 
-    public static int countAdventurers(String[] parsedData){
+    public static int countAdventurers(String[] parsedData) {
         int count = 0;
-        for(String line: parsedData){
-            if(line.startsWith("A")) {
+        for (String line : parsedData) {
+            if (line.startsWith("A")) {
                 count++;
             }
         }
         return count;
     }
 
-    public static int countTreasures(String[] parsedData){
+    public static int countTreasures(String[] parsedData) {
         int count = 0;
-        for(String line: parsedData){
-            if(line.startsWith("T")) {
+        for (String line : parsedData) {
+            if (line.startsWith("T")) {
                 count++;
             }
         }
@@ -82,47 +82,82 @@ public class FileUtils {
         return parsedData;
     }
 
-    public static String extractMapData(String [] parsedData){
+    public static String[] parseMapData(String mapData) {
+        String[] mapInfo = mapData.split("-");
+        return mapInfo;
+    }
+
+    public static String[][] parseMoutainData(String[] mountainData) {
+        String[][] mountainInfo = new String[mountainData.length][3];
+        int count = 0;
+        for (String line : mountainData) {
+            mountainInfo[count] = line.split("-");
+            count++;
+        }
+        return mountainInfo;
+    }
+
+    public static String[][] parseTreasureData(String[] treasureData) {
+        String[][] treasureInfo = new String[treasureData.length][3];
+        int count = 0;
+        for (String line : treasureData) {
+            treasureInfo[count] = line.split("-");
+            count++;
+        }
+        return treasureInfo;
+    }
+
+    public static String[][] parseAdventurerData(String[] adventurerData) {
+        String[][] adventurerInfo = new String[adventurerData.length][6];
+        int count = 0;
+        for (String line : adventurerData) {
+            adventurerInfo[count] = line.split("-");
+            count++;
+        }
+        return adventurerInfo;
+    }
+
+    public static String extractMapData(String[] parsedData) {
         String mapData = "";
-        for (int i = 0; i < parsedData.length; i++){
-            if(parsedData[i].startsWith("C")){
+        for (int i = 0; i < parsedData.length; i++) {
+            if (parsedData[i].startsWith("C")) {
                 mapData = parsedData[i];
             }
         }
         return mapData;
     }
 
-    public static String[] extractMountainData(String [] parsedData){
-        String [] mountainData = new String[countMountains(parsedData)];
+    public static String[] extractMountainData(String[] parsedData) {
+        String[] mountainData = new String[countMountains(parsedData)];
         int countAdds = 0;
-        for (int i = 0; i < parsedData.length; i++){
-            if(parsedData[i].startsWith("M")){
+        for (int i = 0; i < parsedData.length; i++) {
+            if (parsedData[i].startsWith("M")) {
                 mountainData[countAdds] = parsedData[i];
-                countAdds ++;
+                countAdds++;
             }
         }
         return mountainData;
     }
 
-    public static String[] extractAdventurerData(String [] parsedData){
-        String [] mountainData = new String[countAdventurers(parsedData)];
+    public static String[] extractAdventurerData(String[] parsedData) {
+        String[] mountainData = new String[countAdventurers(parsedData)];
         int countAdds = 0;
-        for (int i = 0; i < parsedData.length; i++){
-            if(parsedData[i].startsWith("A")){
+        for (int i = 0; i < parsedData.length; i++) {
+            if (parsedData[i].startsWith("A")) {
                 mountainData[countAdds] = parsedData[i];
-                countAdds ++;
+                countAdds++;
             }
         }
         return mountainData;
     }
 
-    public static String[] extractTreasureData(String [] parsedData){
-        String [] treasureData = new String[countTreasures(parsedData)];
+    public static String[] extractTreasureData(String[] parsedData) {
+        String[] treasureData = new String[countTreasures(parsedData)];
         int countAdds = 0;
-        for (int i = 0; i < parsedData.length; i++){
-            if(parsedData[i].startsWith("T")){
+        for (int i = 0; i < parsedData.length; i++) {
+            if (parsedData[i].startsWith("T")) {
                 treasureData[countAdds] = parsedData[i];
-                countAdds ++;
+                countAdds++;
             }
         }
         return treasureData;

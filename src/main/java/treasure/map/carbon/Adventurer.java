@@ -2,16 +2,18 @@ package treasure.map.carbon;
 
 public class Adventurer {
     private String name;
-    private Number numberOfTreasures;
+    private int numberOfTreasures;
     private Orientation orientation;
     private Position position;
 
-    public Adventurer(String name, Number numberOfTreasures, Orientation orientation, Position position) {
+    public Adventurer(String name, int numberOfTreasures, Orientation orientation, Position position) {
         this.name = name;
         this.numberOfTreasures = numberOfTreasures;
         this.orientation = orientation;
         this.position = position;
     }
+
+
 
     public String getName() {
         return name;
