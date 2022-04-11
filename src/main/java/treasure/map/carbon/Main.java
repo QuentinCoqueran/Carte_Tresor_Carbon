@@ -10,33 +10,25 @@ public class Main {
                 String[] parsedData = FileUtils.parseInputData(inputdata);
                 TreasureMap map1 = createMap(parsedData);
                 TreasureMap.printMap(map1.getMap());
-                Adventurer adventurer = createAdventurer(parsedData);
+                Adventurer[] adventurers = createAdventurer(parsedData);
         }
 
-        private static Adventurer createAdventurer(String[] parsedData) {
+        private static Adventurer[] createAdventurer(String[] parsedData) {
                 String [] adventurerData = FileUtils.extractAdventurerData(parsedData);
                 String[][] adventurerInfo = FileUtils.parseAdventurerData(adventurerData);
-                if (adventurerInfo[0][4].equals("S")){
-                        adventurerInfo[0][4] = "South";
-
+                Adventurer[] adventurers = new Adventurer[adventurerInfo.length];
+                // for multiple adventurers
+                for(int i = 0; i < adventurerInfo.length; i++) {
+                        Position position = new Position(Integer.parseInt(adventurerInfo[i][3]), Integer.parseInt(adventurerInfo[i][2]));
+                        adventurers[i] = switch (adventurerInfo[i][4]) {
+                                case "S" -> new Adventurer(adventurerInfo[i][1], 0, Orientation.South, position, adventurerInfo[i][5]);
+                                case "N" -> new Adventurer(adventurerInfo[i][1], 0, Orientation.North, position, adventurerInfo[i][5]);
+                                case "E" -> new Adventurer(adventurerInfo[i][1], 0, Orientation.East, position, adventurerInfo[i][5]);
+                                case "W" -> new Adventurer(adventurerInfo[i][1], 0, Orientation.West, position, adventurerInfo[i][5]);
+                                default -> throw new IllegalArgumentException("Invalid orientation");
+                        };
                 }
-                if (adventurerInfo[0][4].equals("N")){
-                        adventurerInfo[0][4] = "North";
-                }
-                if (adventurerInfo[0][4].equals("E")){
-                        adventurerInfo[0][4] = "East";
-                }
-                if (adventurerInfo[0][4].equals("0")){
-                        adventurerInfo[0][4] = "West";
-                }
-
-                Adventurer adventurer = new Adventurer(
-                                adventurerInfo[0][0],
-                                0,
-
-                );
-
-                return adventurer;
+                return adventurers;
         }
 
 
@@ -55,6 +47,7 @@ public class Main {
 
                 String [] treasureData = FileUtils.extractTreasureData(parsedData);
                 String[][] treasureInfo = FileUtils.parseTreasureData(treasureData);
+
 
                 String [] adventurerData = FileUtils.extractAdventurerData(parsedData);
                 String[][] adventurerInfo = FileUtils.parseAdventurerData(adventurerData);

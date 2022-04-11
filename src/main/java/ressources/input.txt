@@ -9,3 +9,4 @@ T - 0 - 3 - 2
 T - 1 - 3 - 3
 # Adventurers info
 A - Lara - 1 - 1 - S - AADADAGGA
+A - Alex - 2 - 2 - S - AADADAGGA

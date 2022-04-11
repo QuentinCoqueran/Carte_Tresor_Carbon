@@ -16,6 +16,14 @@ public class Position {
         return new Position(this.x, this.y-1);
     }
 
+    @Override
+    public String toString() {
+        return "Position{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
+
     public Position goWest(){
         return new Position(this.x-1, this.y);
     }
