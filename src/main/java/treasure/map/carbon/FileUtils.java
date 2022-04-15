@@ -1,8 +1,6 @@
 package treasure.map.carbon;
-import java.io.File;  // Import the File class
-import java.io.FileNotFoundException;  // Import this class to handle errors
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner; // Import the Scanner class to read text files
@@ -174,11 +172,11 @@ public class FileUtils {
         return lines;
     }
 
-    public static void printOutputFile(TreasureMap map1, Adventurer[] updatedAdventurers, String[]parsedData) {
+    public static void printOutputFile(TreasureMap map1, Adventurer[] updatedAdventurers, String[] parsedData) {
 
-        String [] treasureData = FileUtils.extractTreasureData(parsedData);
-        String [] mountainData = FileUtils.extractMountainData(parsedData);
-        String[] outputData = new String[parsedData.length+1];
+        String[] treasureData = FileUtils.extractTreasureData(parsedData);
+        String[] mountainData = FileUtils.extractMountainData(parsedData);
+        String[] outputData = new String[parsedData.length + 1];
         int countAdds = 0;
         outputData[countAdds] = parsedData[0];
         countAdds++;
@@ -186,20 +184,25 @@ public class FileUtils {
             outputData[countAdds] = mountainData[i];
             countAdds++;
         }
-        for(int i = 0; i < treasureData.length; i++) {
+        for (int i = 0; i < treasureData.length; i++) {
             outputData[countAdds] = treasureData[i];
             countAdds++;
         }
-        for(int i = 0; i < updatedAdventurers.length; i++) {
-           outputData[countAdds] = updatedAdventurers[i].toString();
-           countAdds++;
+        for (int i = 0; i < updatedAdventurers.length; i++) {
+            outputData[countAdds] = updatedAdventurers[i].toString();
+            countAdds++;
         }
         outputData[countAdds] = "# J'ai pas eu le temps de respecter le format de sortie pour les aventuriers le format est le suivant : {A comme Aventurier} - {Nom de l’aventurier} - {Nb. trésors ramassés} - {Orientation} - {Axe horizontal} - {Axe " +
                 "vertical} - {Mouvements}";
-        for(int i = 0 ; i < outputData.length; i++) {
-            System.out.println(outputData[i]);
+        try {
+            String path = "C:/Users/quent/IdeaProjects/Carte_Tresor_Carbon/src/main/java/ressources/output.txt";
+            PrintWriter writer = new PrintWriter(path, StandardCharsets.UTF_8);
+            for (int i = 0; i < outputData.length; i++) {
+                writer.println(outputData[i]);
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
-
-

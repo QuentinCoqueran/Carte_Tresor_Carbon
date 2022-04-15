@@ -31,16 +31,16 @@ public class Adventurer {
 
     public void move_foward(TreasureMap map) {
         switch (this.orientation){
-            case North:
+            case N:
                 this.position = this.position.goNorth(map, Adventurer.this);
                 break;
-            case South:
+            case S:
                 this.position = this.position.goSouth(map, Adventurer.this);
                 break;
-            case West:
+            case W:
                 this.position = this.position.goWest(map, Adventurer.this);
                 break;
-            case East:
+            case E:
                 this.position = this.position.goEast(map, Adventurer.this);
                 break;
         }
@@ -48,34 +48,34 @@ public class Adventurer {
 
     public void rotate_left() {
         switch (this.orientation){
-            case North:
-                this.orientation = Orientation.West;
+            case N:
+                this.orientation = Orientation.W;
                 break;
-            case West:
-                this.orientation = Orientation.South;
+            case W:
+                this.orientation = Orientation.S;
                 break;
-            case South:
-                this.orientation = Orientation.East;
+            case S:
+                this.orientation = Orientation.E;
                 break;
-            case East:
-                this.orientation = Orientation.North;
+            case E:
+                this.orientation = Orientation.N;
                 break;
         }
     }
 
     public void rotate_right() {
         switch (this.orientation){
-            case North:
-                this.orientation = Orientation.East;
+            case N:
+                this.orientation = Orientation.E;
                 break;
-            case South:
-                this.orientation = Orientation.West;
+            case S:
+                this.orientation = Orientation.W;
                 break;
-            case East:
-                this.orientation = Orientation.South;
+            case E:
+                this.orientation = Orientation.S;
                 break;
-            case West:
-                this.orientation = Orientation.North;
+            case W:
+                this.orientation = Orientation.N;
                 break;
         }
     }
