@@ -8,4 +8,4 @@ M - 2 - 1
 T - 0 - 3 - 2
 T - 1 - 3 - 3
 # Adventurers info
-A - Lara - 1 - 2 - S - A
+A - Lara - 1 - 2 - S - AA

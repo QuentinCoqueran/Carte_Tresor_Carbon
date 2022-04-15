@@ -128,11 +128,11 @@ public class Adventurer {
     }
 
     public Position getPosition() {
-        return position;
+        return this.position;
     }
 
     public Orientation getOrientation() {
-        return orientation;
+        return this.orientation;
     }
 }
 

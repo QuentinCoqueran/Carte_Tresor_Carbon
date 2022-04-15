@@ -67,13 +67,11 @@ public class Position {
         }
         if (map.map[x][y].startsWith("T")) {
             adventurer.numberOfTreasures++;
-            int nbTreasureLeft = parseInt(map.map[x][y].substring(2,3));
+            String stNbTreasureLeft = map.map[x][y].substring(2,3);
+            int nbTreasureLeft = parseInt(stNbTreasureLeft);
             if (nbTreasureLeft > 1) {
-                StringBuilder sb = new StringBuilder(map.map[x][y]);
                 nbTreasureLeft--;
-                char c = (char) (nbTreasureLeft);
-                sb.setCharAt(2, c);
-                map.map[x][y] = sb.toString();
+                map.map[x][y] = map.map[x][y].replace(stNbTreasureLeft, String.valueOf(nbTreasureLeft));
             } else {
                 map.map[x][y] = ".";
             }

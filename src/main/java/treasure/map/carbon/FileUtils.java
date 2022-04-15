@@ -173,7 +173,6 @@ public class FileUtils {
     }
 
     public static void printOutputFile(TreasureMap map1, Adventurer[] updatedAdventurers, String[] parsedData) {
-
         String[] treasureData = FileUtils.extractTreasureData(parsedData);
         String[] mountainData = FileUtils.extractMountainData(parsedData);
         String[] outputData = new String[parsedData.length + 1];
