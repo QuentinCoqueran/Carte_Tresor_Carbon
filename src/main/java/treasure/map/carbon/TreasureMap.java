@@ -3,10 +3,28 @@ package treasure.map.carbon;
 import java.util.Arrays;
 
 public class TreasureMap {
-    private String[][] map;
+    public String[][] map;
+    public int width;
+    public int height;
 
     public TreasureMap(int x, int y) {
         this.map = createMap(x, y);
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 
     public String[][] createMap(int x, int y) {
@@ -16,7 +34,13 @@ public class TreasureMap {
                 map[i][j] = ".";
             }
         }
+        this.width = x;
+        this.height = y;
         return map;
+    }
+
+    public void setMap(String[][] map) {
+        this.map = map;
     }
 
     public static void printMap(String[][] treasureMap) {
@@ -24,9 +48,14 @@ public class TreasureMap {
         for (int i = 0; i < treasureMap.length; i++) {
             for( int j = 0; j < treasureMap[i].length; j++) {
                 if (treasureMap[i][j].startsWith("T")) {
+                    System.out.print(treasureMap[i][j]+"    ");
+                    continue;
+                }
+                if(treasureMap[i][j].startsWith("A")) {
                     System.out.print(treasureMap[i][j]);
-                }else {
-                    System.out.print(treasureMap[i][j]+ "   ");
+                }
+                else {
+                    System.out.print(treasureMap[i][j]+ "       ");
                 }
             }
             System.out.println();
@@ -54,7 +83,7 @@ public class TreasureMap {
     public void addAdventurer(String[][] adventurerInfo) {
         for(int i = 0; i < adventurerInfo.length; i++){
             this.map[Integer.parseInt(adventurerInfo[i][3])]
-                    [Integer.parseInt(adventurerInfo[i][2])] = "A";
+                    [Integer.parseInt(adventurerInfo[i][2])] = "A("+ adventurerInfo[i][1] + ") ";
         }
     }
 }

@@ -10,10 +10,31 @@ public class Main {
                 String[] parsedData = FileUtils.parseInputData(inputdata);
                 TreasureMap map1 = createMap(parsedData);
                 TreasureMap.printMap(map1.getMap());
-                Adventurer[] adventurers = createAdventurer(parsedData);
+                Adventurer[] adventurers = createAdventurer(parsedData, map1);
+                Adventurer[] updatedAdventurers = updateAdventurers(parsedData, map1, adventurers);
+                TreasureMap.printMap(map1.getMap());
+                FileUtils.printOutputFile(map1, updatedAdventurers, parsedData);
         }
 
-        private static Adventurer[] createAdventurer(String[] parsedData) {
+        private static Adventurer[] updateAdventurers(String[] parsedData, TreasureMap map1, Adventurer[] adventurers) {
+                String [] adventurerData = FileUtils.extractAdventurerData(parsedData);
+                String[][] adventurerInfo = FileUtils.parseAdventurerData(adventurerData);
+                for(int i = 0; i < adventurers.length; i++) {
+                        System.out.println(adventurers[i].toString());
+                        map1.map[adventurers[i].getPosition().getX()][adventurers[i].getPosition().getY()] = ".";
+                        adventurers[i].analyseMouvements(adventurers[i].getMouvements(),map1, adventurers[i].getPosition());
+                        adventurers[i].updatePosition(adventurers[i].getPosition());
+                        adventurerInfo[i][3] = Integer.toString(adventurers[i].getPosition().getX());
+                        adventurerInfo[i][2] = Integer.toString(adventurers[i].getPosition().getY());
+
+                        System.out.println(adventurers[i].toString());
+                }
+                map1.addAdventurer(adventurerInfo);
+                return adventurers;
+        }
+
+
+        private static Adventurer[] createAdventurer(String[] parsedData, TreasureMap map1) {
                 String [] adventurerData = FileUtils.extractAdventurerData(parsedData);
                 String[][] adventurerInfo = FileUtils.parseAdventurerData(adventurerData);
                 Adventurer[] adventurers = new Adventurer[adventurerInfo.length];
@@ -40,26 +61,20 @@ public class Main {
                 }
 
                 String mapData = FileUtils.extractMapData(parsedData);
-                String[] mapInfo = FileUtils.parseMapData(mapData); // checked
+                String[] mapInfo = FileUtils.parseMapData(mapData);
 
                 String [] mountainData = FileUtils.extractMountainData(parsedData);
                 String[][] mountainInfo = FileUtils.parseMoutainData(mountainData);
 
                 String [] treasureData = FileUtils.extractTreasureData(parsedData);
                 String[][] treasureInfo = FileUtils.parseTreasureData(treasureData);
-
-
                 String [] adventurerData = FileUtils.extractAdventurerData(parsedData);
                 String[][] adventurerInfo = FileUtils.parseAdventurerData(adventurerData);
-
                 System.out.println("--------------------------");
-
                 TreasureMap map1 = new TreasureMap(Integer.parseInt(mapInfo[2]), Integer.parseInt(mapInfo[1]));
-
                 map1.addTreasure(treasureInfo);
                 map1.addMountain(mountainInfo);
                 map1.addAdventurer(adventurerInfo);
-
                 return map1;
         }
 }

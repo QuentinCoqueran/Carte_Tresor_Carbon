@@ -2,7 +2,7 @@ package treasure.map.carbon;
 
 public class Adventurer {
     private String name;
-    private int numberOfTreasures;
+    public int numberOfTreasures;
     private Orientation orientation;
     private Position position;
     private String mouvements;
@@ -18,28 +18,30 @@ public class Adventurer {
 
     @Override
     public String toString() {
-        return "Adventurer{" +
-                "name='" + name + '\'' +
-                ", numberOfTreasures=" + numberOfTreasures +
-                ", orientation=" + orientation +
-                ", position=" + position +
-                ", mouvements='" + mouvements + '\'' +
-                '}';
+        return "A - " + name + " - " + numberOfTreasures + " - " + orientation + " - " + position + " - " + mouvements;
     }
 
-    public void move_foward() {
+    public String getMouvements() {
+        return mouvements;
+    }
+
+    public void setMouvements(String mouvements) {
+        this.mouvements = mouvements;
+    }
+
+    public void move_foward(TreasureMap map) {
         switch (this.orientation){
             case North:
-                this.position = this.position.goNorth();
+                this.position = this.position.goNorth(map, Adventurer.this);
                 break;
             case South:
-                this.position = this.position.goSouth();
+                this.position = this.position.goSouth(map, Adventurer.this);
                 break;
             case West:
-                this.position = this.position.goWest();
+                this.position = this.position.goWest(map, Adventurer.this);
                 break;
             case East:
-                this.position = this.position.goEast();
+                this.position = this.position.goEast(map, Adventurer.this);
                 break;
         }
     }
@@ -78,24 +80,28 @@ public class Adventurer {
         }
     }
 
-    public void analyseMouvements(String[] mouvements) {
-        for (String mouvement : mouvements) {
-            switch (mouvement) {
-                case "A":
-                    this.move_foward();
+    public void analyseMouvements(String mouvements, TreasureMap map, Position position) {
+        for (int i = 0 ; i < mouvements.length() ; i++){
+            switch (mouvements.charAt(i)){
+                case 'A':
+
+                    this.move_foward(map);
                     break;
-                case "G":
+                case 'G':
                     this.rotate_left();
-                    this.move_foward();
+                    this.move_foward(map);
                     break;
-                case "D":
+                case 'D':
                     this.rotate_right();
-                    this.move_foward();
+                    this.move_foward(map);
                     break;
             }
         }
     }
 
+    public void updatePosition(Position newPosition) {
+        this.position = newPosition;
+    }
 
     public String getName() {
         return name;
