@@ -48,5 +48,5 @@ public class TreasureTest {
         Assertions.assertEquals(new Position(2, 1).getX(), adventurer.getPosition().getX());
         Assertions.assertEquals(new Position(2, 1).getY(), adventurer.getPosition().getY());
     }
-
+    // j'aurai aimé en faire plus avec les montagnes les trésors etc...
 }
